@@ -38,6 +38,12 @@ functions:
 
 _Note_: In current form, after deployment, your API is public and can be invoked by anyone. For production deployments, you might want to configure an authorizer. For details on how to do that, refer to [http event docs](https://www.serverless.com/framework/docs/providers/aws/events/apigateway/).
 
+#### Deploying specific functions only
+Deploying specific functions is way more faster and efficient than deploying the whole project. Here's how you can deploy specific functions:
+```
+$ serverless deploy -f <function_name>
+```
+
 ### Invocation
 
 After successful deployment, you can call the created application via HTTP:
