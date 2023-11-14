@@ -6,6 +6,9 @@ frameworkVersion: '3'
 provider:
   name: aws
   runtime: nodejs18.x
+  region: ap-south-1
+  memorySize: 128 #mb
+  timeout: 10 #seconds
 
 functions:
   api:
@@ -28,3 +31,5 @@ resources:
         KeySchema:
           - AttributeName: id
             KeyType: HASH
+plugins:
+  - serverless-offline
