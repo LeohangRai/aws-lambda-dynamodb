@@ -1,0 +1,11 @@
+{
+  "name": "aws-node-http-api-project",
+  "version": "1.0.0",
+  "main": "src/index.js",
+  "author": "Leohang Rai <raileohang@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "aws-sdk": "^2.1495.0",
+    "uuid": "^9.0.1"
+  }
+}
