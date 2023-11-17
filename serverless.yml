@@ -3,18 +3,31 @@ app: aws-node-http-api-project
 service: aws-node-http-api-project
 frameworkVersion: '3'
 
+custom:
+  tableName: 'todos-table-${self:provider.stage}'
+
 provider:
   name: aws
   runtime: nodejs18.x
+  stage: dev
   region: ap-south-1
   memorySize: 128 #mb
   timeout: 10 #seconds
-  iamRoleStatements:
-    - Effect: Allow
-      Action:
-        - dynamodb:*
-      Resource:
-        - arn:aws:dynamodb:ap-south-1:667509035742:table/TodoTable
+  iam:
+    role:
+      statements:
+        - Effect: 'Allow'
+          Resource:
+            - { "Fn::GetAtt": ["TodoTable", "Arn"] }
+          Action:
+            - 'dynamodb:Query'
+            - 'dynamodb:Scan'
+            - 'dynamodb:GetItem'
+            - 'dynamodb:PutItem'
+            - 'dynamodb:UpdateItem'
+            - 'dynamodb:DeleteItem'
+  environment:
+    TO_DO_TABLE: ${self:custom.tableName}
 
 functions:
   default:
@@ -35,7 +48,7 @@ resources:
     TodoTable:
       Type: AWS::DynamoDB::Table
       Properties:
-        TableName: TodoTable
+        TableName: ${self:custom.tableName}
         BillingMode: PAY_PER_REQUEST
         AttributeDefinitions:
           - AttributeName: id
