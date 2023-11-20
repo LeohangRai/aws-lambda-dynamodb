@@ -19,7 +19,7 @@ const addTodo = async (event) => {
       id: v4(),
       todo,
       completed,
-      createdAt: new Date()
+      createdAt: new Date().toISOString()
     };
     await dynamoDB
       .put({
