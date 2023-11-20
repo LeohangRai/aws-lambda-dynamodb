@@ -48,6 +48,12 @@ functions:
       - httpApi:
           path: /todo
           method: get
+  getTodoById:
+    handler: src/getTodoById.handler
+    events:
+      - httpApi:
+          path: /todo/{id}
+          method: get
 
 resources:
   Resources:
